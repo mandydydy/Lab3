@@ -11,7 +11,6 @@ p=zeros(T,num_class);
 alpha=zeros(T,1);
 classes=class_label;
 
-
 w_t=ones(num_row_data,1);
 w_t=w_t/num_row_data;
 
