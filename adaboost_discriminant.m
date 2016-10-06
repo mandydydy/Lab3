@@ -1,5 +1,4 @@
 function c = adaboost_discriminant(data, mu, sigma, p, alpha, classes, T)
-
 % c: Mx1
 [num_row_data,num_col_data]=size(data);
 
