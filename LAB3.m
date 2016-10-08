@@ -1,4 +1,6 @@
 %%read image
+clc
+clear all
 hand = imread('hand.ppm', 'ppm');
 book = imread('book.ppm', 'ppm');
 % imagesc(hand);
