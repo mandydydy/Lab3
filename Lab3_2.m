@@ -8,6 +8,9 @@ book = imread('book.ppm', 'ppm');
 data1 = normalize_and_label(hand, 0);
 data2 = normalize_and_label(book, 1);
 test_data = [data1; data2];
+
+
+[M N] = size(test_data);
 figure;
 hold on;
 plot(data2(:,1), data2(:,2), '.');
@@ -16,19 +19,20 @@ legend('Hand holding book', 'Hand');
 xlabel('green');
 ylabel('red');
 
-[M N] = size(test_data);
-
 T = 6;
 [mu sigma p alpha classes] = adaboost(test_data, T);
+theta = [0:0.01:2*pi];
+x1 = 2*sigma(1,1)*cos(theta) + mu(1,1);
+y1 = 2*sigma(1,2)*sin(theta) + mu(1,2);
+x2 = 2*sigma(2,1)*cos(theta) + mu(2,1);
+y2 = 2*sigma(2,2)*sin(theta) + mu(2,2);
+plot(x1, y1, 'r');
+hold on
+plot(x2, y2);
+
 class = adaboost_discriminant(test_data(:,1:N-1), mu,sigma, p, alpha, classes, T);
 boost_error_test = 1.0-sum(class == test_data(:,end))/M;
 
-
-figure;
-hold on;
-plot(data2(:,1), data2(:,2), '.');
-plot(data1(:,1), data1(:,2), '.r');
-legend('Hand holding book', 'Hand');
 ax = [0.2 0.5 0.2 0.45];
 axis(ax);
 x = ax(1):0.01:ax(2);
@@ -40,6 +44,8 @@ g = adaboost_discriminant([z1 z2], mu, sigma, p, alpha, classes, T);
 gg = reshape(g, length(y), length(x));
 [c,h] = contour(x, y, gg, [0.5 0.5]);
 set(h, 'LineWidth', 3);
+
+
 
 book_rg = zeros(size(book,1), size(book,2), 2);
 for y=1:size(book,1)
