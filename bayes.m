@@ -29,10 +29,12 @@ function [mu, sigma] = bayes(data)
     for i=1:num_class
         ind_class=find(data(:,num_col_data)==class_label(i));
         for n=1:num_feature
-            for m=1:M(i)    
-                sigma(i,n)=sigma(i,n)+(data(ind_class(m),n)-mu(i,n))^2;
+            for m=1:M(i) 
+                m_in_ci=ind_class(m);
+                sigma(i,n)=sigma(i,n)+(data(m_in_ci,n)-mu(i,n))^2;
             end
             sigma(i,n)=sigma(i,n)/M(i);
+            sigma(i,n)=sqrt(sigma(i,n));
         end
     end
 end
