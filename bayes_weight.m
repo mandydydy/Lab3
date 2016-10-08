@@ -36,6 +36,8 @@ function [mu, sigma] = bayes_weight(data, w)
                 sum_w=sum_w+w(ind_class(m));
             end
             sigma(i,n)=sigma(i,n)/sum_w;
+            sigma(i,n)=sqrt(sigma(i,n));
+
         end
     end
 end
