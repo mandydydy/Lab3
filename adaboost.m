@@ -22,7 +22,7 @@ for t=1:T
     [dummy class] = max(g, [], 2);
     class = class - 1;
     error_test = 1.0-sum((class == data(:,end)).*w_t);
-    alpha_t = 1/(2*log((1-error_test)/error_test));
+    alpha_t = 1/2*log((1-error_test)/error_test);
     
     sign=-2*(class == data(:,end))+1;%if class is right, sign equals to -1
     w_t=w_t.*exp(alpha_t*sign);
