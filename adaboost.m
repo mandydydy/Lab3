@@ -5,8 +5,8 @@ class_label=unique(data(:,num_col_data));% the 3rd colum is the class informatio
 num_class=length(class_label);
 num_feature=num_col_data-1;
 
-mu=zeros(T, num_class, num_feature);
-sigma=zeros(T, num_class, num_feature);
+mu=zeros(num_class, num_feature,T);
+sigma=zeros(num_class, num_feature,T);
 p=zeros(T,num_class);
 alpha=zeros(T,1);
 classes=class_label;
@@ -30,8 +30,8 @@ for t=1:T
     
     for c=1:num_class
         for n=1:num_feature
-            mu(t,c,n)=mu_t(c,n);
-            sigma(t,c,n)=sigma_t(c,n);
+            mu(c,n,t)=mu_t(c,n);
+            sigma(c,n,t)=sigma_t(c,n);
         end
         p(t,c)=p_t(c);
     end

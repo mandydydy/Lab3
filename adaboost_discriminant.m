@@ -18,8 +18,8 @@ p_t=zeros(num_class,1);
 for t=1:T
     for c=1:num_class
         for n=1:num_feature
-            mu_t(c,n)=mu(t,c,n);
-            sigma_t(c,n)=sigma(t,c,n);
+            mu_t(c,n)=mu(c, n ,t);
+            sigma_t(c,n)=sigma(c, n, t);
         end
         p_t(c)=p(t,c);
     end
